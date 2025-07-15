@@ -23,6 +23,11 @@ public class Bank {
 
     // no arguments
     public Bank() {
+        String defaultBankName = "BANK&DEF123";
+        BranchLocations defaultBranch = BranchLocations.DEFAULT;
+
+        this.bankName = defaultBankName;
+        this.branchLocation = defaultBranch;
     }
 
     // two arguments: bankName,
@@ -31,7 +36,7 @@ public class Bank {
         String defaultBankName = "BANK&DEF123";
         BranchLocations defaultBranch = BranchLocations.DEFAULT;
 
-        if (!setBankName(bankName)) {
+        if (bankName == null || !setBankName(bankName)) {
             this.bankName = defaultBankName;
         }
 
@@ -42,11 +47,16 @@ public class Bank {
 
     //two arguments: bankName,
     public Bank(String bankName, BranchLocations branchLocation) {
+
+        String defaultBankName = "BANK&DEF123";
+        BranchLocations defaultBranch = BranchLocations.DEFAULT;
+
+
         if (!setBankName(bankName)) {
-            this.bankName = "BANK&DEF123";
+            this.bankName = defaultBankName;
         }
         if (!setBranchLocation(branchLocation)) {
-            this.branchLocation = BranchLocations.DEFAULT;
+            this.branchLocation = defaultBranch;
         }
     }
 
@@ -215,7 +225,12 @@ public class Bank {
     }
 
     public Account viewAccount(byte index) {
-        return new Account();
+        if (index < 0 || index >= accounts.size()) {
+            System.out.println("Invalid index: " + index + ". Returning default constructor...");
+            return new Account();
+        }
+
+        return accounts.get(index);
     }
 
     public boolean modifyAccount(int accountNumber, String accountName) {

@@ -15,6 +15,13 @@ public class Account {
 
     // no arguments
     public Account() {
+        String accountNameDefault = "DEF-";
+        int accountNumberDefault = 11111;
+        double accountBalanceDefault = 11.11;
+
+        this.accountNumber = accountNumberDefault;
+        this.accountName = accountNameDefault;
+        this.accountBalance = accountBalanceDefault;
     }
 
     // three arguments
@@ -188,8 +195,14 @@ public class Account {
         // equals(Object obj) passes in any type of object; code doesn't know we want an Account object
         // cast the object to Account so code can compare Account objects properly
         Account otherAccount = (Account) obj;
-        // compare the account numbers; return true if they match; return false if they don't match
-        return this.accountNumber == otherAccount.accountNumber;
+        if (this.accountNumber != otherAccount.accountNumber)
+            return false;
+        if (Double.compare(this.accountBalance, otherAccount.accountBalance) != 0)
+            return false;
+        if (!this.accountName.equals(otherAccount.accountName))
+            return false;
+        return true;
+
     }
 
     @Override
