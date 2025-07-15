@@ -13,7 +13,7 @@ public class Bank {
 
     // BranchLocations objects with list of branch locations
     public static enum BranchLocations {
-        TORONTO, VANCOUVER, MONTREAL, CALGARY, HALIFAX, DEFAULT
+        NORTHVANCOUVER, VANCOUVER, BURNABY, RICHMOND, NEWWESTMINSTER, SURREY, DEFAULT
     }
 
     private String bankName;
@@ -170,7 +170,7 @@ public class Bank {
         return this.branchLocation.toString();
     }
 
-    // functinn purpose: validate whether BranchLocations object is null; update if it isn't
+    // function purpose: validate whether BranchLocations object is null; update if it isn't
     public boolean setBranchLocation(BranchLocations branchLocation) {
         if (branchLocation == null) {
             System.out.println("Branch location is null. Not updating branch location. Returning false...");
@@ -184,14 +184,14 @@ public class Bank {
 
     // - - -  Methods: Accounts - - - //
 
-    // validate accountNumber input, iterater over accounts list, return match if it's found, create new object if match isn't found
+    // validate accountNumber input, iterate over accounts list, return match if it's found, create new object if match isn't found
     public Account getAccountByNumber(int accountNumber) {
 
         // once input has been validated via helper function, iterate over accounts list
         if (validateAccountNumber(accountNumber)) {
             // use length (i.e. size() ) of accounts list to know how many loops to iterate
             for (int i = 0; i < accounts.size(); i++) {
-                // if current iteration value of object's getAccountNumber() outcome matches the input passed into thisd function
+                // if current iteration value of object's getAccountNumber() outcome matches the input passed into this function
                 if (accounts.get(i).getAccountNumber() == accountNumber) {
                     // then we have found a matching account; we return that account
                     System.out.println("We have found your account.");
@@ -268,7 +268,7 @@ public class Bank {
         return accounts.get(index);
     }
 
-    // validate inputs, validate the index is valid, iterate over accounts to search for a match,then update relevant arguments using setters
+    // validate inputs, validate the index is valid, iterate over accounts to search for a match, then update relevant arguments using setters
     public boolean modifyAccount(int accountNumber, String accountName) {
 
         if (validateAccountName(accountName) && validateAccountNumber(accountNumber)) {

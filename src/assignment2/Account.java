@@ -80,7 +80,7 @@ public class Account {
             return false;
         }
 
-        // conspiile pattern to search for whitespace chars; match that against accountName
+        // compile pattern to search for whitespace chars; match that against accountName
         Matcher whitespaceMatcher = Pattern.compile("\\s").matcher(accountName);
         // while we have whitespace chars to find, run the while loop, and increment count on each loop
         while (whitespaceMatcher.find())
@@ -113,7 +113,7 @@ public class Account {
         // cast int to string for purpose of checking against a regex pattern
         String accountNumberAsString = Integer.toString(accountNumber);
 
-        // required pattern: a number between 1 to 9 (so we have no leading zeroes), and then between 4-8 of numbers from 0-9; gives us 5-9 chars total
+        // required pattern: a number between 1 and 9 (so we have no leading zeroes), and then between 4-8 of numbers from 0-9; gives us 5-9 chars total
         if (!accountNumberAsString.matches("^[1-9][0-9]{4,8}$")) {
             System.out.println("Input has too many or too few digits, or has leading zeros.");
             System.out.println("Returning false...");
@@ -142,7 +142,7 @@ public class Account {
         -?              : optional minus sign
             (               : start of group
             \\d+            : one or more digits
-            (\.\d{1,2})?    : optional - decimal followed by up to two digits
+            (\\.\\d{1,2})?  : optional - decimal followed by up to two digits
             |               : OR
             \\.\d{1,2}      : decimal followed by up to two digits (no leading digits)
             )               : end of group
