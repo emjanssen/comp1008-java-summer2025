@@ -657,6 +657,14 @@ public class Bank {
     }
 
     public boolean deleteAccount(byte index) {
-        return false;
+        if (index < 0 || index >= accounts.size()) {
+            System.out.println("Invalid index: " + index + ". Returning false...");
+            return false;
+        }
+
+        Account selectedAccount = accounts.get(index);
+        System.out.println("Account " + selectedAccount.getAccountNumber() + " found at index " + index + " and deleted. Returning true...");
+        accounts.remove(index);
+        return true;
     }
 }
