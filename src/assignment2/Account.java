@@ -40,14 +40,9 @@ public class Account {
         }
     }
 
-    // - - - Methods - - - //
+    // -- Helper Methods -- //
 
-    public String getAccountName() {
-        return this.accountName;
-    }
-
-    public boolean setAccountName(String accountName) {
-
+    public static boolean validateAccountName(String accountName) {
         String accountNameRegex = "^[a-zA-Z\\- ']*$";
         Pattern permitted = Pattern.compile(accountNameRegex);
         int whitespaceCount = 0;
@@ -55,14 +50,12 @@ public class Account {
 
         if (accountName.length() < 4) {
             System.out.println("The account name must be at least four characters.");
-            System.out.println("Current value remains: " + this.accountName);
             System.out.println("Returning false...");
             return false;
         }
 
         if (!permitted.matcher(accountName).matches()) {
             System.out.println("Your account name contains invalid characters.");
-            System.out.println("Current value remains: " + this.accountName);
             System.out.println("Returning false...");
             return false;
         }
@@ -72,7 +65,6 @@ public class Account {
             whitespaceCount++;
         if (whitespaceCount > 1) {
             System.out.println("You have included too many whitespace chars.");
-            System.out.println("Current value remains: " + this.accountName);
             System.out.println("Returning false...");
             return false;
         }
@@ -82,15 +74,64 @@ public class Account {
             singleQuoteCount++;
         if (singleQuoteCount > 1) {
             System.out.println("You have included too many single quote mark chars.");
-            System.out.println("Current value remains: " + this.accountName);
             System.out.println("Returning false...");
             return false;
         }
 
-        this.accountName = accountName;
-        System.out.println("Value updated: " + this.accountName);
+        // if input is not returned as false, return as true
         return true;
     }
+
+    public static boolean validateAccountNumber(int accountNumber) {
+
+        String accountNumberAsString = Integer.toString(accountNumber);
+
+        if (!accountNumberAsString.matches("^[1-9][0-9]{4,8}$")) {
+            System.out.println("Input has too many or too few digits, or has leading zeros.");
+            System.out.println("Returning false...");
+            return false;
+        }
+
+        if (accountNumber < 1) {
+            System.out.println("Input is not a positive number.");
+            System.out.println("Returning false...");
+            return false;
+        }
+
+        // if input is not returned as false, return as true
+        return true;
+    }
+
+    public static boolean validateAccountBalance(double accountBalance) {
+        String valueAsString = Double.toString(accountBalance);
+
+        if (!valueAsString.matches("^-?(\\d+(\\.\\d{1,2})?|\\.\\d{1,2})$")) {
+            System.out.println("Input is invalid.");
+            System.out.println("Returning false...");
+            return false;
+        }
+
+        // if input is not returned as false, return as true
+        return true;
+    }
+
+    // - - - Methods: Account Name - - - //
+
+    public String getAccountName() {
+        return this.accountName;
+    }
+
+    public boolean setAccountName(String accountName) {
+
+        if (validateAccountName(accountName)) {
+            this.accountName = accountName;
+            System.out.println("Value updated: " + this.accountName);
+            return true;
+        }
+        return false;
+    }
+
+    // - - - Methods: Account Number - - - //
 
     public int getAccountNumber() {
         return this.accountNumber;
@@ -98,27 +139,15 @@ public class Account {
 
     public boolean setAccountNumber(int accountNumber) {
 
-        String accountNumberAsString = Integer.toString(accountNumber);
-
-        if (!accountNumberAsString.matches("^[1-9][0-9]{4,8}$")) {
-            System.out.println("Input has too many or too few digits, or has leading zeros.");
-            System.out.println("Current value remains: " + this.accountNumber);
-            System.out.println("Returning false...");
-            return false;
+        if (validateAccountNumber(accountNumber)) {
+            this.accountNumber = accountNumber;
+            System.out.println("Value updated: " + this.accountNumber);
+            return true;
         }
-
-        if (accountNumber < 1) {
-            System.out.println("Input is not a positive number.");
-            System.out.println("Current value remains: " + this.accountNumber);
-            System.out.println("Returning false...");
-            return false;
-        }
-
-        // if input is not returned as false, return as true
-        this.accountNumber = accountNumber;
-        System.out.println("Value updated: " + this.accountNumber);
-        return true;
+        return false;
     }
+
+    // - - - Methods: Account Balance - - - //
 
     public double getAccountBalance() {
         return this.accountBalance;
@@ -126,18 +155,12 @@ public class Account {
 
     public boolean setAccountBalance(double accountBalance) {
 
-        String valueAsString = Double.toString(accountBalance);
-
-        if (!valueAsString.matches("^-?(\\d+(\\.\\d{1,2})?|\\.\\d{1,2})$")) {
-            System.out.println("Input is invalid.");
-            System.out.println("Current value remains: " + this.accountBalance);
-            System.out.println("Returning false...");
-            return false;
+        if (validateAccountBalance(accountBalance)) {
+            this.accountBalance = accountBalance;
+            System.out.println("Value updated: " + this.accountBalance);
+            return true;
         }
-
-        this.accountBalance = accountBalance;
-        System.out.println("Value updated: " + this.accountBalance);
-        return true;
+        return false;
     }
 
     // - - - Overrides - - - //
@@ -150,14 +173,14 @@ public class Account {
             return true;
         }
 
-        // if the object we're comparing isn't an Account object
-        // return false to prevent ClassCastException exception
-        if (!(obj instanceof Account)) {
+        // if the object is null, return false and exit function
+        if (obj == null) {
             return false;
         }
 
-        // if the object is null, return false and exit function
-        if (obj == null) {
+        // if the object we're comparing isn't an Account object
+        // return false to prevent ClassCastException exception
+        if (!(obj instanceof Account)) {
             return false;
         }
 
