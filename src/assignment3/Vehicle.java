@@ -45,37 +45,42 @@ public class Vehicle { // - Done
     // 2) Create 4 constructors with parameters + the default constructor
     // - - - Constructors - - - //
 
-    // no arguments; all default values
+    // default values for Vehicle object fields
+    // making them static and final and using caps to indicate constant value
+    public static final String DEFAULT_COLOUR = "black";
+    public static final int DEFAULT_NUMBER_OF_DOORS = 4;
+    public static final boolean DEFAULT_IS_GAS_POWERED = true;
+
+    // no parameters
     public Vehicle() {
 
-        String defaultColor = "black";
-        int defaultNumberOfDoors = 4;
-        boolean defaultIsGasPowered = true;
-
-        this.color = defaultColor;
-        this.numberOfDoors = defaultNumberOfDoors;
-        this.isGasPowered = defaultIsGasPowered;
+        this.color = DEFAULT_COLOUR;
+        this.numberOfDoors = DEFAULT_NUMBER_OF_DOORS;
+        this.isGasPowered = DEFAULT_IS_GAS_POWERED;
     }
 
-    // colour - call default constructor, which assigns default values; override with user input for colour
+    // colour parameter
     public Vehicle(String color) {
-        this();
         this.color = color;
+        this.numberOfDoors = DEFAULT_NUMBER_OF_DOORS;
+        this.isGasPowered = DEFAULT_IS_GAS_POWERED;
     }
 
-    // number of doors - call default constructor, which assigns default values; override with user input for number of doors
+    // numberOfDoors parameter
     public Vehicle(int numberOfDoors) {
-        this();
         this.numberOfDoors = numberOfDoors;
+        this.color = DEFAULT_COLOUR;
+        this.isGasPowered = DEFAULT_IS_GAS_POWERED;
     }
 
-    // gas-powered - call default constructor, which assigns default values; override with user input for isGasPowered
+    // isGasPowered parameter
     public Vehicle(boolean isGasPowered) {
-        this();
         this.isGasPowered = isGasPowered;
+        this.color = DEFAULT_COLOUR;
+        this.numberOfDoors = DEFAULT_NUMBER_OF_DOORS;
     }
 
-    // all arguments - call default constructor, which assigns default values; override with user input for all parameters
+    // all parameters
     public Vehicle(String color, int numberOfDoors, boolean isGasPowered) {
         this.color = color;
         this.numberOfDoors = numberOfDoors;
