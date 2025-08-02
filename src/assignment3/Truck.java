@@ -73,5 +73,30 @@ public class Truck extends Vehicle {
         this.numberOfSeats = numberOfSeats;
         this.trunkSpaceInFeet = trunkSpaceInFeet;
     }
+
+    // - - - Overrides - - - //
+
+    // 3) Override (not Overload) the equals() method so it evaluates two Truck objects and returns true if and only if (iff) the two Truck objects are equal is value
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null) {
+            return false;
+        }
+        if (getClass() != object.getClass()) {
+            return false;
+        }
+        Truck otherTruck = (Truck) object;
+        return this.numberOfSeats == otherTruck.numberOfSeats && this.trunkSpaceInFeet == otherTruck.trunkSpaceInFeet;
+    }
+
+    // 4) Override the toString method to summarize all instance variables of the class
+    @Override
+    public String toString() {
+        return "Vehicle color: " + color + "\nNumber of doors: " + numberOfDoors + " \nWhether the vehicle is gas-powered: " + isGasPowered + " \n" +
+                "Number of seats: " + numberOfSeats + " \nTrunk space in feet: " + trunkSpaceInFeet;
+    }
 }
 
