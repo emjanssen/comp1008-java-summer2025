@@ -15,7 +15,7 @@ public class Truck extends Vehicle {
     // make them static and final (i.e. constants) so they cannot be modified
     // using caps syntax to indicate that they are constants
     public static final int DEFAULT_NUMBER_OF_SEATS = 5;
-    public static final double DEFAULT_TRUNK_SPACE_IN_FEET = 6.5;
+    public static final double DEFAULT_TRUNK_SPACE_IN_FEET = 0;
 
     // a) The default constructor
     public Truck() {
@@ -82,21 +82,37 @@ public class Truck extends Vehicle {
         if (this == object) {
             return true;
         }
-        if (object == null) {
-            return false;
-        }
-        if (getClass() != object.getClass()) {
+        if ((object == null) || (getClass() != object.getClass())) {
             return false;
         }
         Truck otherTruck = (Truck) object;
-        return this.numberOfSeats == otherTruck.numberOfSeats && this.trunkSpaceInFeet == otherTruck.trunkSpaceInFeet;
+        return super.equals(object)                         // Compare Vehicle fields (color, doors, etc.)
+                && this.numberOfSeats == otherTruck.numberOfSeats
+                && this.trunkSpaceInFeet == otherTruck.trunkSpaceInFeet;
     }
 
     // 4) Override the toString method to summarize all instance variables of the class
     @Override
     public String toString() {
-        return "Vehicle color: " + color + "\nNumber of doors: " + numberOfDoors + " \nWhether the vehicle is gas-powered: " + isGasPowered + " \n" +
-                "Number of seats: " + numberOfSeats + " \nTrunk space in feet: " + trunkSpaceInFeet;
+        return super.toString() + "\nNumber of seats: " + numberOfSeats + "\nTrunk space in feet: " + trunkSpaceInFeet;
+    }
+
+    //5) Override the isEcoFriendly method. In addition to its original behavior, it also determines if the Truck has at most two seats and has no trunk space.
+    @Override
+    public boolean isEcoFriendly() {
+        // if isEcoFriendly returns true from Vehicle class, we check whether the truck has 2 or fewer seats, and check if the truck space is 0
+        if (super.isEcoFriendly()) {
+            // if conditions are true, overridden isEcoFriendly() function returns true
+            if ((numberOfSeats <= 2) && (trunkSpaceInFeet == 0)) {
+                return true;
+            } else
+            // if conditions are false, overridden isEcoFriendly() function returns false
+            {
+                return false;
+            }
+            // if isEcoFriendly returns false from Vehicle class, we already know Truck is not going to be eco-friendly; no need to check for seat count or truck size
+        } else {
+            return false;
+        }
     }
 }
-
