@@ -10,6 +10,10 @@ public abstract class Keyboard {
     public String keyboardManufacturer;
     public double keyboardLengthInInches;
 
+    // also going to have default constant values for default constructor
+    public static final String DEFAULT_MANUFACTURER = "Logitech";
+    public static final double DEFAULT_LENGTH_INCHES = 17.0;
+
     // - - - Methods - - - //
 
     // b) concrete methods (2 marks)
@@ -29,21 +33,18 @@ public abstract class Keyboard {
     }
 
     // c) abstract methods (2 marks)
-    // method details will be defined in Computer class and also make use of the Button interface
-    public abstract int listenForButtonPress(int keypress);
-    public abstract double countWordsPerMinute(double wordsPerMinute);
+    // method details will be defined in Computer class
+    // two booleans representing physical trait options for keyboards
+    public abstract boolean isWireless();
+    public abstract boolean hasRGBLighting();
 
     // d) constructors (2 marks)
     // - - - Constructors - - - //
 
     // no parameters, assigning default values
     public Keyboard() {
-
-        String defaultKeyboardManufacturer = "Logitech";
-        double defaultKeyboardLengthInInches = 17.0;
-
-        this.keyboardManufacturer = defaultKeyboardManufacturer;
-        this.keyboardLengthInInches = defaultKeyboardLengthInInches;
+        this.keyboardManufacturer = DEFAULT_MANUFACTURER;
+        this.keyboardLengthInInches = DEFAULT_LENGTH_INCHES;
     }
 
     // both parameters, no default values assigned
