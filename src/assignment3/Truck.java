@@ -1,6 +1,6 @@
 package assignment3;
 
-public class Truck extends Vehicle {
+public class Truck extends Vehicle { // - Done
 
     // 1) Create two additional instance variables with unique non-private accessibility levels and data types to represent the following attributes of a truck
     // - - - Public Variables - - - //
